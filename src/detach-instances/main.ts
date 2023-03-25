@@ -1,47 +1,40 @@
-const SUPPORTED_NODE_TYPES = [
-  "COMPONENT_SET",
-  "COMPONENT",
-  "FRAME",
-  "GROUP",
-  "INSTANCE",
-  "SECTION",
-];
+const SUPPORTED_NODE_TYPES = ['COMPONENT_SET', 'COMPONENT', 'FRAME', 'GROUP', 'INSTANCE', 'SECTION']
 
-let totalDetachedInstances = 0;
+let totalDetachedInstances = 0
 
 function detachInstances(node: SceneNode) {
-  if (!SUPPORTED_NODE_TYPES.includes(node.type)) return;
+  if (!SUPPORTED_NODE_TYPES.includes(node.type)) return
 
-  let current = node;
+  let current = node
 
-  if (current.type === "INSTANCE") {
-    current = current.detachInstance();
-    totalDetachedInstances += 1;
+  if (current.type === 'INSTANCE') {
+    current = current.detachInstance()
+    totalDetachedInstances += 1
   }
 
-  if ("children" in current) {
+  if ('children' in current) {
     current.children.forEach((children: SceneNode) => {
-      detachInstances(children);
-    });
+      detachInstances(children)
+    })
   }
 }
 
 function getMessage() {
-  const instancesCopy = totalDetachedInstances > 1 ? "instances" : "instance";
+  const instancesCopy = totalDetachedInstances > 1 ? 'instances' : 'instance'
 
-  return `Detached ${totalDetachedInstances} ${instancesCopy}`;
+  return `Detached ${totalDetachedInstances} ${instancesCopy}`
 }
 
 export default function () {
-  const selection = figma.currentPage.selection;
+  const selection = figma.currentPage.selection
 
   if (selection.length === 0) {
-    return figma.notify("Select at least one element to detach instances");
+    return figma.notify('Select at least one element to detach instances')
   }
 
-  selection.forEach(detachInstances);
+  selection.forEach(detachInstances)
 
-  if (totalDetachedInstances === 0) return figma.notify("No linked styles found");
+  if (totalDetachedInstances === 0) return figma.notify('No linked styles found')
 
-  figma.closePlugin(getMessage());
+  figma.closePlugin(getMessage())
 }

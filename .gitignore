@@ -1,7 +1,26 @@
-.DS_Store
+# Logs
 *.log
-*.css.d.ts
-*.tsbuildinfo
-build/
+npm-debug.log*
+
+# Dependency directories
 node_modules/
+
+# macOS files
+.DS_Store
+
+# build folder
+build/
+
+# VSCode config files
+.vscode/
+
+# Typescript files
+*.tsbuildinfo
+
+# Auto-generated manifest file
 manifest.json
+
+# Cache files
+.npm
+.eslintcache
+.cache

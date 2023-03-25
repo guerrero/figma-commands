@@ -6,26 +6,42 @@
     "@create-figma-plugin/build": "^2.2.0",
     "@create-figma-plugin/tsconfig": "^2.2.0",
     "@figma/plugin-typings": "^1.58.0",
-    "typescript": ">=4"
+    "@typescript-eslint/eslint-plugin": "^5.56.0",
+    "@typescript-eslint/parser": "^5.56.0",
+    "eslint": "^8.36.0",
+    "eslint-config-prettier": "^8.8.0",
+    "prettier": "^2.8.7",
+    "rimraf": "^4.4.1",
+    "typescript": "^5.0.2"
   },
   "scripts": {
+    "prebuild": "rimraf dist/*",
     "build": "build-figma-plugin --typecheck --minify",
-    "watch": "build-figma-plugin --typecheck --watch"
+    "watch": "build-figma-plugin --typecheck --watch",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
+    "format": "prettier --write ."
   },
   "figma-plugin": {
-    "editorType": [
-      "figma"
-    ],
+    "editorType": ["figma"],
     "id": "1676660366330",
     "name": "Figma Commands",
     "menu": [
       {
-        "name": "Unlink layer styles",
-        "main": "src/unlink-layer-styles/main.ts"
-      },
-      {
         "name": "Detach instances",
         "main": "src/detach-instances/main.ts"
+      },
+      {
+        "name": "Remove all auto layout constraints",
+        "main": "src/remove-all-auto-layout-constraints/main.ts"
+      },
+      {
+        "name": "Remove hidden layers",
+        "main": "src/remove-hidden-layers/main.ts"
+      },
+      {
+        "name": "Unlink layer styles",
+        "main": "src/unlink-layer-styles/main.ts"
       }
     ]
   }

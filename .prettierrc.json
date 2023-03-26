@@ -8,7 +8,7 @@
   "arrowParens": "avoid",
   "endOfLine": "auto",
   "trailingComma": "es5",
-  "printWidth": 120,
+  "printWidth": 80,
   "overrides": [
     {
       "files": "*.html",

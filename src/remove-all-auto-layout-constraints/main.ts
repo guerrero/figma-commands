@@ -1,4 +1,10 @@
-const SUPPORTED_NODE_TYPES = ['COMPONENT_SET', 'COMPONENT', 'FRAME', 'GROUP', 'SECTION']
+const SUPPORTED_NODE_TYPES = [
+  'COMPONENT_SET',
+  'COMPONENT',
+  'FRAME',
+  'GROUP',
+  'SECTION',
+]
 
 let totalModifiedLayers = 0
 
@@ -34,7 +40,10 @@ export default function () {
 
   selection.forEach(removeAutoLayout)
 
-  if (totalModifiedLayers === 0) return figma.notify('No elements where auto layout can be remove has been found')
+  if (totalModifiedLayers === 0)
+    return figma.notify(
+      'No elements where auto layout can be remove has been found'
+    )
 
   figma.notify(getMessage())
   figma.closePlugin()

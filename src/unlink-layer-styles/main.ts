@@ -1,4 +1,10 @@
-const STYLE_ID_PROPERTIES = ['gridStyleId', 'textStyleId', 'fillStyleId', 'strokeStyleId', 'effectStyleId'] as const
+const STYLE_ID_PROPERTIES = [
+  'gridStyleId',
+  'textStyleId',
+  'fillStyleId',
+  'strokeStyleId',
+  'effectStyleId',
+] as const
 
 let totalUnlinkedStyles = 0
 let totalModifiedLayers = 0
@@ -6,7 +12,10 @@ let totalModifiedLayers = 0
 function unlinkStyle(node: SceneNode) {
   // TODO: Remove styles from text ranges
 
-  return (total: number, styleIdProperty: (typeof STYLE_ID_PROPERTIES)[number]) => {
+  return (
+    total: number,
+    styleIdProperty: (typeof STYLE_ID_PROPERTIES)[number]
+  ) => {
     if (styleIdProperty in node && (node as any)[styleIdProperty] !== '') {
       ;(node as any)[styleIdProperty] = ''
       return total + 1

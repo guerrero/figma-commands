@@ -1,4 +1,11 @@
-const SUPPORTED_NODE_TYPES = ['COMPONENT_SET', 'COMPONENT', 'FRAME', 'GROUP', 'INSTANCE', 'SECTION']
+const SUPPORTED_NODE_TYPES = [
+  'COMPONENT_SET',
+  'COMPONENT',
+  'FRAME',
+  'GROUP',
+  'INSTANCE',
+  'SECTION',
+]
 
 let totalDetachedInstances = 0
 
@@ -34,7 +41,8 @@ export default function () {
 
   selection.forEach(detachInstances)
 
-  if (totalDetachedInstances === 0) return figma.notify('No linked styles found')
+  if (totalDetachedInstances === 0)
+    return figma.notify('No linked styles found')
 
   figma.closePlugin(getMessage())
 }

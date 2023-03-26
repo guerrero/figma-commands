@@ -1,30 +1,14 @@
-const SUPPORTED_NODE_TYPES = [
-  'BOOLEAN_OPERATION',
-  'COMPONENT_SET',
-  'COMPONENT',
-  'ELLIPSE',
-  'FRAME',
-  'GROUP',
-  'INSTANCE',
-  'LINE',
-  'POLYGON',
-  'RECTANGLE',
-  'SECTION',
-  'STAR',
-  'VECTOR',
-]
-
 const STYLE_ID_PROPERTIES = ['gridStyleId', 'textStyleId', 'fillStyleId', 'strokeStyleId', 'effectStyleId'] as const
 
-let totalStylesUnlinked = 0
-let totalElementsChanged = 0
+let totalUnlinkedStyles = 0
+let totalModifiedLayers = 0
 
-function unlinkStyle(node: SceneNode & Record<typeof STYLE_ID_PROPERTIES[number], string>) {
-  // Remove styles from text ranges
+function unlinkStyle(node: SceneNode) {
+  // TODO: Remove styles from text ranges
 
   return (total: number, styleIdProperty: (typeof STYLE_ID_PROPERTIES)[number]) => {
-    if (styleIdProperty in node && node[styleIdProperty] !== '') {
-      node[styleIdProperty] = ''
+    if (styleIdProperty in node && (node as any)[styleIdProperty] !== '') {
+      ;(node as any)[styleIdProperty] = ''
       return total + 1
     }
 
@@ -33,13 +17,11 @@ function unlinkStyle(node: SceneNode & Record<typeof STYLE_ID_PROPERTIES[number]
 }
 
 function unlinkStyles(node: SceneNode) {
-  if (!SUPPORTED_NODE_TYPES.includes(node.type)) return
-
   const totalChangesApplied = STYLE_ID_PROPERTIES.reduce(unlinkStyle(node), 0)
 
   if (totalChangesApplied > 0) {
-    totalStylesUnlinked += totalChangesApplied
-    totalElementsChanged += 1
+    totalUnlinkedStyles += totalChangesApplied
+    totalModifiedLayers += 1
   }
 
   if ('children' in node) {
@@ -50,10 +32,10 @@ function unlinkStyles(node: SceneNode) {
 }
 
 function getMessage() {
-  const stylesCopy = totalStylesUnlinked > 1 ? 'styles' : 'style'
-  const elementsCopy = totalElementsChanged > 1 ? 'elements' : 'element'
-  const fullStylesCopy = `${totalStylesUnlinked} ${stylesCopy}`
-  const fullElementsCopy = `${totalElementsChanged} ${elementsCopy}`
+  const stylesCopy = totalUnlinkedStyles > 1 ? 'styles' : 'style'
+  const elementsCopy = totalModifiedLayers > 1 ? 'elements' : 'element'
+  const fullStylesCopy = `${totalUnlinkedStyles} ${stylesCopy}`
+  const fullElementsCopy = `${totalModifiedLayers} ${elementsCopy}`
   const message = `Removed ${fullStylesCopy} from ${fullElementsCopy}`
 
   return message
@@ -68,7 +50,7 @@ export default function () {
 
   selection.forEach(unlinkStyles)
 
-  if (totalStylesUnlinked === 0) return figma.notify('No linked styles found')
+  if (totalUnlinkedStyles === 0) return figma.notify('No linked styles found')
 
   figma.closePlugin(getMessage())
 }

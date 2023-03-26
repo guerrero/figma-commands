@@ -1,6 +1,6 @@
 const SUPPORTED_NODE_TYPES = ['COMPONENT_SET', 'COMPONENT', 'FRAME', 'GROUP', 'SECTION']
 
-let totalModifiedElements = 0
+let totalModifiedLayers = 0
 
 function removeAutoLayout(node: SceneNode) {
   if (!SUPPORTED_NODE_TYPES.includes(node.type)) return
@@ -9,7 +9,7 @@ function removeAutoLayout(node: SceneNode) {
 
   if ('layoutMode' in current) {
     current.layoutMode = 'NONE'
-    totalModifiedElements += 1
+    totalModifiedLayers += 1
   }
 
   if ('children' in current) {
@@ -20,9 +20,9 @@ function removeAutoLayout(node: SceneNode) {
 }
 
 function getMessage() {
-  const elementsCopy = totalModifiedElements > 1 ? 'elements' : 'element'
+  const elementsCopy = totalModifiedLayers > 1 ? 'elements' : 'element'
 
-  return `Removed auto layout from ${totalModifiedElements} ${elementsCopy}`
+  return `Removed auto layout from ${totalModifiedLayers} ${elementsCopy}`
 }
 
 export default function () {
@@ -34,7 +34,7 @@ export default function () {
 
   selection.forEach(removeAutoLayout)
 
-  if (totalModifiedElements === 0) return figma.notify('No elements where auto layout can be remove has been found')
+  if (totalModifiedLayers === 0) return figma.notify('No elements where auto layout can be remove has been found')
 
   figma.notify(getMessage())
   figma.closePlugin()

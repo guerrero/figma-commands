@@ -9,5 +9,6 @@
   "arrowParens": "avoid",
   "endOfLine": "lf",
   "trailingComma": "es5",
-  "printWidth": 80
+  "printWidth": 80,
+  "proseWrap": "always"
 }

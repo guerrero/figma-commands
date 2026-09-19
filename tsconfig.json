@@ -1,7 +1,12 @@
 {
   "extends": "@create-figma-plugin/tsconfig",
   "compilerOptions": {
-    "typeRoots": ["node_modules/@figma", "node_modules/@types"]
+    "jsx": "react",
+    "jsxFactory": "h",
+    "lib": ["DOM", "ES2020"],
+    "skipLibCheck": true,
+    "typeRoots": ["node_modules/@figma", "node_modules/@types"],
+    "types": ["plugin-typings"]
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"]
 }

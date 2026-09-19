@@ -22,5 +22,5 @@ manifest.json
 
 # Cache files
 .npm
-.eslintcache
+.oxlintcache
 .cache

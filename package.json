@@ -1,31 +1,41 @@
 {
-  "dependencies": {
-    "@create-figma-plugin/utilities": "^2.2.0"
-  },
-  "devDependencies": {
-    "@create-figma-plugin/build": "^2.2.0",
-    "@create-figma-plugin/tsconfig": "^2.2.0",
-    "@figma/plugin-typings": "^1.58.0",
-    "@typescript-eslint/eslint-plugin": "^5.56.0",
-    "@typescript-eslint/parser": "^5.56.0",
-    "eslint": "^8.36.0",
-    "eslint-config-prettier": "^8.8.0",
-    "prettier": "^2.8.7",
-    "rimraf": "^4.4.1",
-    "typescript": "^5.0.2"
-  },
   "scripts": {
-    "prebuild": "rimraf dist/*",
     "build": "build-figma-plugin --typecheck --minify",
     "watch": "build-figma-plugin --typecheck --watch",
-    "lint": "eslint . --ext .ts",
-    "lint:fix": "eslint . --ext .ts --fix",
-    "format": "prettier --write ."
+    "typecheck": "tsc --noEmit",
+    "lint": "oxlint .",
+    "lint:fix": "oxlint --fix .",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check"
+  },
+  "dependencies": {
+    "@create-figma-plugin/ui": "^4.0.3",
+    "@create-figma-plugin/utilities": "^4.0.3",
+    "preact": ">=10"
+  },
+  "devDependencies": {
+    "@create-figma-plugin/build": "^4.0.3",
+    "@create-figma-plugin/tsconfig": "^4.0.3",
+    "@figma/plugin-typings": "^1.138.0",
+    "oxfmt": "^0.67.0",
+    "oxlint": "^1.82.0",
+    "typescript": "^5.9.3"
   },
   "figma-plugin": {
-    "editorType": ["figma"],
+    "api": "1.0.0",
+    "capabilities": [],
+    "documentAccess": "dynamic-page",
+    "editorType": [
+      "figma"
+    ],
+    "enableProposedApi": false,
     "id": "1676660366330",
     "name": "Figma Commands",
+    "networkAccess": {
+      "allowedDomains": [
+        "none"
+      ]
+    },
     "menu": [
       {
         "name": "Detach instances",
@@ -42,6 +52,11 @@
       {
         "name": "Unlink layer styles",
         "main": "src/unlink-layer-styles/main.ts"
+      },
+      {
+        "name": "Type Scanner",
+        "main": "src/type-scanner/main.ts",
+        "ui": "src/type-scanner/ui.tsx"
       }
     ]
   }

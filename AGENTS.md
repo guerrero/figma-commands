@@ -14,8 +14,10 @@ src/
   remove-all-auto-layout-constraints/main.ts
   remove-hidden-layers/main.ts
   unlink-layer-styles/main.ts
+  get-all-color-styles/main.ts
+  tidy-up-top-left-aligned/main.ts
   type-scanner/{main.ts,scan.ts,types.ts,ui.tsx}  # only command WITH UI
-package.json          # figma-plugin manifest (id 1676660366330) + 5-command menu
+package.json          # figma-plugin manifest (id 1676660366330) + 7-command menu
 tsconfig.json         # extends @create-figma-plugin/tsconfig (skipLibCheck, types: plugin-typings)
 .oxlintrc.json        # lint (replaces eslint)
 .oxfmtrc.json         # formatting (replaces prettier, style: singleQuote, semi:false, tabWidth:2)

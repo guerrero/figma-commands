@@ -10,9 +10,11 @@ A collection of handy commands for Figma, built with [Create Figma Plugin](https
 | **Remove all auto layout constraints** | Sets `layoutMode = 'NONE'` on layers with auto layout inside the selection                                           |
 | **Remove hidden layers**               | Deletes hidden layers (`visible == false`). With no selection, it operates on the whole file                         |
 | **Unlink layer styles**                | Unlinks grid, text, fill, stroke, and effect styles (`*StyleId = ''`) in the selection                               |
+| **Get All Color Styles**               | Collects fill/stroke color styles used on the page and logs each name with its hex code to the console               |
+| **Tidy Up (Top left aligned)**         | Arranges the selection (2+ layers) into a tidy top-left-aligned grid with 24px spacing                               |
 | **Type Scanner**                       | Scans the current page, groups text styles (family + size + weight), and lets you select layers by group from its UI |
 
-The first four are UI-less commands (selection → `notify` + close). Type Scanner opens a UI (Preact) with a `Scan` button, a counted group list, and click-to-select.
+The first six are UI-less commands (selection → `notify` + close). Type Scanner opens a UI (Preact) with a `Scan` button, a counted group list, and click-to-select.
 
 ## Requirements
 

@@ -21,6 +21,9 @@
     "oxlint": "^1.82.0",
     "typescript": "^5.9.3"
   },
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "figma-plugin": {
     "api": "1.0.0",
     "capabilities": [],
@@ -52,6 +55,14 @@
       {
         "name": "Unlink layer styles",
         "main": "src/unlink-layer-styles/main.ts"
+      },
+      {
+        "name": "Get All Color Styles",
+        "main": "src/get-all-color-styles/main.ts"
+      },
+      {
+        "name": "Tidy Up (Top left aligned)",
+        "main": "src/tidy-up-top-left-aligned/main.ts"
       },
       {
         "name": "Type Scanner",
